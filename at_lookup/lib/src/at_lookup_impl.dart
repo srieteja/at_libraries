@@ -240,9 +240,7 @@ class AtLookupImpl implements AtLookUp {
     if (scanResult.isNotEmpty) {
       scanResult = scanResult.replaceFirst('data:', '');
     }
-    return (scanResult.isNotEmpty)
-        ? List.from(jsonDecode(scanResult))
-        : [];
+    return (scanResult.isNotEmpty) ? List.from(jsonDecode(scanResult)) : [];
   }
 
   @override
@@ -386,7 +384,8 @@ class AtLookupImpl implements AtLookUp {
 
   Future<String?> _sync(SyncVerbBuilder builder) async {
     var atCommand = builder.buildCommand();
-    return await _process(atCommand, auth: true);
+    final syncResult = await _process(atCommand, auth: true);
+    return syncResult;
   }
 
   Future<String?> executeCommand(String atCommand, {bool auth = false}) async {
@@ -502,7 +501,12 @@ class AtLookupImpl implements AtLookUp {
 
   Future<bool> createOutBoundConnection(host, port, toAtSign) async {
     try {
-      var secureSocket = await SecureSocket.connect(host, int.parse(port));
+      var secureSocket = await SecureSocket.connect(host, int.parse(port))
+          .catchError((error, stackTrace) {
+        logger
+            .finer('exception connecting to socket in at_lookup: $stackTrace');
+        throw SecondaryConnectException('unable to connect to secondary');
+      });
       _connection = OutboundConnectionImpl(secureSocket);
       if (outboundConnectionTimeout != null) {
         _connection!.setIdleTime(outboundConnectionTimeout);

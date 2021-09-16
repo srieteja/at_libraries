@@ -18,7 +18,7 @@ class OutboundMessageListener {
   /// @throws [AtConnectException] if the connection is not yet created
   void listen() {
     _connection.getSocket().listen(messageHandler,
-        onDone: _finishedHandler, onError: _errorHandler);
+        onDone: _finishedHandler, onError: _errorHandler, cancelOnError: true);
     _queue = Queue();
   }
 
