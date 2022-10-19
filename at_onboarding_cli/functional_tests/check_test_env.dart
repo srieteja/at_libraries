@@ -12,7 +12,6 @@ void main() {
   String atsign = '@sitaram🛠';
   int atsignPort = 25017;
   String rootServer = 'vip.ve.atsign.zone';
-
   SecureSocket _secureSocket;
 
   test('checking for test environment readiness', () async {
