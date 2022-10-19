@@ -67,8 +67,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v2
 
       - uses: dart-lang/setup-dart@v1
         with:
@@ -85,6 +83,9 @@ jobs:
       - name: Start docker instance
         working-directory: at_onboarding_cli/functional_tests
         run: sudo docker-compose up -d
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v2
         
       - name: Check for docker container readiness
         working-directory: at_onboarding_cli/functional_tests
