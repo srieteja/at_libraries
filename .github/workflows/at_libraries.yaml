@@ -66,9 +66,9 @@ jobs:
   functional_tests_at_onboarding_cli:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v1
+        uses: mxschmitt/action-tmate@v2
 
       - uses: dart-lang/setup-dart@v1
         with:
@@ -104,5 +104,3 @@ jobs:
       - name: kill docker image
         working-directory: at_onboarding_cli/functional_tests
         run: sudo docker-compose down
-      
-    
