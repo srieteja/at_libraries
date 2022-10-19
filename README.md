@@ -11,7 +11,7 @@ contributions, and we want pull requests to hear about issues.
 
 ## What is this for?
 
-This repository contains three atPlatform libraries for developers building
+This repository contains thre e atPlatform libraries for developers building
 their own atPlatform applications. (These libraries can also be found on
 [pub.dev](https://pub.dev/publishers/atsign.org/packages))
 
